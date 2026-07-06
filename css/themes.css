@@ -1,0 +1,73 @@
+/* ============================================================
+   THEMES.CSS
+   ------------------------------------------------------------
+   Tokens de design (paleta "mesmo céu"): fundo noturno profundo,
+   auroras em roxo/rosa/azul e um leve dourado de luar como
+   acento de destaque. Trocar de tema = trocar estas variáveis.
+   ============================================================ */
+
+:root{
+  /* Cor principal (pode ser sobrescrita pelas Configurações) */
+  --cor-principal: #b06ab3;
+  --cor-principal-rgb: 176,106,179;
+
+  /* Paleta base */
+  --fundo-0: #06060f;
+  --fundo-1: #0b0b1a;
+  --fundo-2: #12122444;
+  --vidro: rgba(255,255,255,0.055);
+  --vidro-borda: rgba(255,255,255,0.11);
+  --texto-1: #f3f1f7;
+  --texto-2: #a9a6bd;
+  --texto-3: #706d85;
+
+  --aurora-a: #7c3aed;
+  --aurora-b: #ec4899;
+  --aurora-c: #3b82f6;
+  --dourado-luar: #f4d58d;
+
+  --sombra-suave: 0 10px 40px rgba(0,0,0,0.35);
+  --sombra-forte: 0 20px 60px rgba(0,0,0,0.5);
+
+  --raio-sm: 12px;
+  --raio-md: 18px;
+  --raio-lg: 28px;
+
+  --fonte-display: 'Fraunces', serif;
+  --fonte-corpo: 'Manrope', sans-serif;
+  --fonte-carta: 'Caveat', cursive;
+
+  --duracao-rapida: .2s;
+  --duracao-media: .45s;
+  --duracao-lenta: .8s;
+  --easing-suave: cubic-bezier(.22,.68,0,1);
+}
+
+/* Tema: Meia-noite — mais frio, mais azul */
+[data-tema="meianoite"]{
+  --fundo-0: #04060f;
+  --fundo-1: #070a18;
+  --aurora-a: #3b82f6;
+  --aurora-b: #7c3aed;
+  --aurora-c: #22d3ee;
+}
+
+/* Tema: Crepúsculo — mais quente, rosa/laranja suave */
+[data-tema="crepusculo"]{
+  --fundo-0: #0d0710;
+  --fundo-1: #170b1c;
+  --aurora-a: #ec4899;
+  --aurora-b: #f97316;
+  --aurora-c: #7c3aed;
+}
+
+/* Quando o usuário desliga animações nas Configurações */
+[data-animacoes="off"] *{
+  animation-duration: 0.001s !important;
+  transition-duration: 0.001s !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.001s !important; transition-duration: 0.001s !important; }
+}

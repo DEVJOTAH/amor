@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>nós — o mesmo céu</title>
+
+<!-- Fontes: Fraunces (títulos), Manrope (texto), Caveat (cartas/assinaturas) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/themes.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ==================== TELA DE CARREGAMENTO ==================== -->
+<div id="tela-carregamento">
+  <div class="carregamento-conteudo">
+
+    <div class="lua-carregando">
+      <img src="icons/logo.png" alt="Logo do casal">
+    </div>
+
+    <p class="carregamento-frase">
+      carregando emoções<span class="reticencias"></span>
+    </p>
+
+    <div class="barra-progresso">
+      <div class="barra-progresso-preenchimento" id="barra-preenchimento"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== FUNDO ANIMADO ==================== -->
+<canvas id="fundo-particulas"></canvas>
+<div class="fundo-aurora" aria-hidden="true">
+  <span class="mancha mancha-1"></span>
+  <span class="mancha mancha-2"></span>
+  <span class="mancha mancha-3"></span>
+</div>
+
+<!-- ==================== CURSOR PERSONALIZADO ==================== -->
+<div id="cursor-ponto"></div>
+<div id="cursor-anel"></div>
+
+<!-- ==================== CONTAINER DE NOTIFICAÇÕES ==================== -->
+<div id="notificacoes-container" aria-live="polite"></div>
+
+<!-- ==================== APP ==================== -->
+<div id="app" class="app-oculto">
+
+  <!-- ---------- Navegação lateral (desktop) / inferior (mobile) ---------- -->
+  <nav id="nav-principal" class="nav-principal">
+    <div class="nav-marca">
+      <span class="nav-marca-luas">☾</span>
+      <span class="nav-marca-texto">nós</span>
+    </div>
+
+    <svg class="nav-constelacao" id="nav-constelacao" aria-hidden="true"></svg>
+
+    <ul class="nav-lista" id="nav-lista">
+      <li><button data-pagina="inicio" class="nav-item ativo"><span class="nav-icone">✦</span><span>Início</span></button></li>
+      <li><button data-pagina="historia" class="nav-item"><span class="nav-icone">✧</span><span>Nossa História</span></button></li>
+      <li><button data-pagina="galeria" class="nav-item"><span class="nav-icone">🖼</span><span>Galeria</span></button></li>
+      <li><button data-pagina="videos" class="nav-item"><span class="nav-icone">▶</span><span>Vídeos</span></button></li>
+      <li><button data-pagina="playlist" class="nav-item"><span class="nav-icone">♫</span><span>Playlist</span></button></li>
+      <li><button data-pagina="contador" class="nav-item"><span class="nav-icone">⏱</span><span>Contador</span></button></li>
+      <li><button data-pagina="timeline" class="nav-item"><span class="nav-icone">⋆</span><span>Linha do Tempo</span></button></li>
+      <li><button data-pagina="cartas" class="nav-item"><span class="nav-icone">✉</span><span>Cartinhas</span></button></li>
+      <li><button data-pagina="metas" class="nav-item"><span class="nav-icone">◈</span><span>Metas</span></button></li>
+      <li><button data-pagina="calendario" class="nav-item"><span class="nav-icone">▦</span><span>Calendário</span></button></li>
+      <li><button data-pagina="lugares" class="nav-item"><span class="nav-icone">⚑</span><span>Lugares</span></button></li>
+      <li><button data-pagina="jogos" class="nav-item"><span class="nav-icone">✺</span><span>Mini Jogos</span></button></li>
+      <li><button data-pagina="sobre" class="nav-item"><span class="nav-icone">i</span><span>Sobre Nós</span></button></li>
+      <li><button data-pagina="config" class="nav-item"><span class="nav-icone">⚙</span><span>Configurações</span></button></li>
+    </ul>
+
+    <button id="btn-tela-cheia" class="botao-fantasma nav-extra" title="Tela cheia">⛶ Tela cheia</button>
+  </nav>
+
+  <!-- ---------- Conteúdo principal ---------- -->
+  <main id="conteudo-principal" class="conteudo-principal">
+
+    <!-- ===== INÍCIO ===== -->
+    <section class="pagina ativa" data-page="inicio">
+      <div class="capa">
+        <p class="capa-eyebrow">bem-vindos ao nosso espaço</p>
+        <h1 class="capa-titulo">Duas cidades.<br>Um só céu.</h1>
+        <p class="capa-frase" id="capa-frase-dinamica"></p>
+        <div class="capa-mini-contador" id="capa-mini-contador"></div>
+        <button class="botao-primario" data-ir-para="historia">Ver nossa história →</button>
+      </div>
+      <div class="capa-cartoes-atalho">
+        <button class="cartao-atalho" data-ir-para="galeria"><span>🖼</span>Galeria</button>
+        <button class="cartao-atalho" data-ir-para="cartas"><span>✉</span>Cartinhas</button>
+        <button class="cartao-atalho" data-ir-para="timeline"><span>⋆</span>Linha do tempo</button>
+        <button class="cartao-atalho" data-ir-para="jogos"><span>✺</span>Jogos</button>
+      </div>
+    </section>
+
+    <!-- ===== NOSSA HISTÓRIA ===== -->
+    <section class="pagina" data-page="historia">
+      <header class="pagina-cabecalho">
+        <h2>Nossa História</h2>
+        <p>Cada capítulo que nos trouxe até aqui.</p>
+      </header>
+      <div class="historia-texto glass" id="historia-texto">
+        <p>oie amor essa é um novo relacionamente e nossas historia  ficara marcada para sempre aqui, entao vamos fazer dá certo okey?</p>
+      </div>
+    </section>
+
+    <!-- ===== GALERIA ===== -->
+    <section class="pagina" data-page="galeria">
+      <header class="pagina-cabecalho">
+        <h2>Galeria</h2>
+        <p><span id="galeria-contador">0</span> fotos guardadas com carinho</p>
+      </header>
+      <div class="galeria-area">
+        <div class="pilha-fotos" id="pilha-fotos">
+          <div class="pilha-vazia" id="pilha-vazia">
+            <p>Nenhuma foto ainda.</p>
+            <p class="pilha-vazia-dica">Coloque imagens na pasta <code>/Galeria</code> e adicione o nome do arquivo em <code>js/config.js</code>.</p>
+          </div>
+        </div>
+        <p class="galeria-instrucao">clique na foto para virar a página ✦</p>
+      </div>
+    </section>
+
+    <!-- ===== VÍDEOS ===== -->
+    <section class="pagina" data-page="videos">
+      <header class="pagina-cabecalho">
+        <h2>Vídeos</h2>
+        <p>Momentos guardados em movimento.</p>
+      </header>
+      <div class="grade-videos" id="grade-videos"></div>
+    </section>
+
+    <!-- ===== PLAYLIST ===== -->
+    <section class="pagina" data-page="playlist">
+      <header class="pagina-cabecalho">
+        <h2>Nossa Playlist</h2>
+        <p>As músicas que contam nossa história.</p>
+      </header>
+      <div class="player glass">
+        <div class="player-capa" id="player-capa">♫</div>
+        <div class="player-info">
+          <h3 id="player-titulo">Nenhuma música adicionada</h3>
+          <p id="player-artista">Adicione músicas em /music e liste em config.js</p>
+          <div class="player-progresso">
+            <span id="player-tempo-atual">0:00</span>
+            <input type="range" id="player-barra" value="0" min="0" max="100" step="0.1">
+            <span id="player-tempo-total">0:00</span>
+          </div>
+          <div class="player-controles">
+            <button id="player-anterior" class="botao-icone" title="Anterior">⏮</button>
+            <button id="player-play" class="botao-icone botao-icone-grande" title="Tocar/Pausar">▶</button>
+            <button id="player-proxima" class="botao-icone" title="Próxima">⏭</button>
+            <div class="player-volume">
+              <span>🔊</span>
+              <input type="range" id="player-volume" min="0" max="1" step="0.01" value="0.7">
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="lista-playlist" id="lista-playlist"></ul>
+      <audio id="audio-player"></audio>
+    </section>
+
+    <!-- ===== CONTADOR ===== -->
+    <section class="pagina" data-page="contador">
+      <header class="pagina-cabecalho">
+        <h2>Juntos há...</h2>
+        <p>Cada segundo contado com carinho.</p>
+      </header>
+      <div class="contador-grade" id="contador-grade">
+        <div class="contador-unidade glass"><span class="contador-numero" id="c-anos">0</span><span class="contador-rotulo">anos</span></div>
+        <div class="contador-unidade glass"><span class="contador-numero" id="c-meses">0</span><span class="contador-rotulo">meses</span></div>
+        <div class="contador-unidade glass"><span class="contador-numero" id="c-dias">0</span><span class="contador-rotulo">dias</span></div>
+        <div class="contador-unidade glass"><span class="contador-numero" id="c-horas">0</span><span class="contador-rotulo">horas</span></div>
+        <div class="contador-unidade glass"><span class="contador-numero" id="c-minutos">0</span><span class="contador-rotulo">min</span></div>
+        <div class="contador-unidade glass"><span class="contador-numero" id="c-segundos">0</span><span class="contador-rotulo">seg</span></div>
+      </div>
+      <p class="contador-desde" id="contador-desde"></p>
+    </section>
+
+    <!-- ===== LINHA DO TEMPO ===== -->
+    <section class="pagina" data-page="timeline">
+      <header class="pagina-cabecalho">
+        <h2>Linha do Tempo</h2>
+        <p>As estrelas que formam a nossa constelação.</p>
+      </header>
+      <div class="timeline" id="timeline-lista"></div>
+    </section>
+
+    <!-- ===== CARTINHAS ===== -->
+    <section class="pagina" data-page="cartas">
+      <header class="pagina-cabecalho">
+        <h2>Cartinhas</h2>
+        <p>Palavras que merecem ficar guardadas.</p>
+      </header>
+      <button class="botao-primario" id="btn-nova-carta">+ Escrever nova carta</button>
+      <div class="grade-cartas" id="grade-cartas"></div>
+    </section>
+
+    <!-- ===== METAS ===== -->
+    <section class="pagina" data-page="metas">
+      <header class="pagina-cabecalho">
+        <h2>Metas do Casal</h2>
+        <p>Sonhos que estamos construindo juntos.</p>
+      </header>
+      <form class="form-linha" id="form-nova-meta">
+        <input type="text" id="input-nova-meta" placeholder="Adicionar uma nova meta..." required>
+        <button type="submit" class="botao-primario">Adicionar</button>
+      </form>
+      <ul class="lista-metas" id="lista-metas"></ul>
+    </section>
+
+    <!-- ===== CALENDÁRIO ===== -->
+    <section class="pagina" data-page="calendario">
+      <header class="pagina-cabecalho">
+        <h2>Datas Importantes</h2>
+        <p>Nenhuma delas passa em branco.</p>
+      </header>
+      <form class="form-linha form-linha-calendario" id="form-nova-data">
+        <input type="text" id="input-titulo-data" placeholder="Nome da data" required>
+        <input type="date" id="input-valor-data" required>
+        <label class="checkbox-linha"><input type="checkbox" id="input-repetir-anual"> repete todo ano</label>
+        <button type="submit" class="botao-primario">Salvar</button>
+      </form>
+      <ul class="lista-datas" id="lista-datas"></ul>
+    </section>
+
+    <!-- ===== LUGARES ===== -->
+    <section class="pagina" data-page="lugares">
+      <header class="pagina-cabecalho">
+        <h2>Lugares que Queremos Conhecer</h2>
+        <p>Um mapa de sonhos para colecionar juntos.</p>
+      </header>
+      <form class="form-linha" id="form-novo-lugar">
+        <input type="text" id="input-novo-lugar" placeholder="Adicionar um destino..." required>
+        <button type="submit" class="botao-primario">Adicionar</button>
+      </form>
+      <ul class="lista-lugares" id="lista-lugares"></ul>
+    </section>
+
+    <!-- ===== MINI JOGOS ===== -->
+    <section class="pagina" data-page="jogos">
+      <header class="pagina-cabecalho">
+        <h2>Mini Jogos</h2>
+        <p>Porque namorar também é rir e brincar.</p>
+      </header>
+      <div class="jogos-menu" id="jogos-menu">
+        <button class="cartao-jogo" data-jogo="quiz"><span class="cartao-jogo-icone">❓</span>Quiz do Casal</button>
+        <button class="cartao-jogo" data-jogo="memoria"><span class="cartao-jogo-icone">🃏</span>Jogo da Memória</button>
+        <button class="cartao-jogo" data-jogo="ppt"><span class="cartao-jogo-icone">✊</span>Pedra, Papel e Tesoura</button>
+      </div>
+      <div class="jogo-area glass" id="jogo-area"></div>
+    </section>
+
+<!-- ===== SOBRE NÓS ===== -->
+<section class="pagina" data-page="sobre">
+  <header class="pagina-cabecalho">
+    <h2>Sobre Nós</h2>
+    <p>A dupla por trás dessa história.</p>
+  </header>
+  <div class="sobre-grade">
+    <div class="sobre-cartao glass">
+      <div class="sobre-avatar">☾</div>
+      <h3 id="sobre-nomeA">Jonatas</h3>
+      <p>um homem que talvez não merecia ter uma mulher assim.</p>
+    </div>
+    <div class="sobre-cartao glass">
+      <div class="sobre-avatar">
+        <img src="/vivian.jpg" alt="Vivian">
+      </div>
+      <h3 id="sobre-nomeB">Vivian</h3>
+      <p>Uma mulher perfeita, a que eu mais amo.</p>
+    </div>
+  </div>
+</section>
+
+    <!-- ===== CONFIGURAÇÕES ===== -->
+    <section class="pagina" data-page="config">
+      <header class="pagina-cabecalho">
+        <h2>Configurações</h2>
+        <p>Deixe o site com a cara de vocês.</p>
+      </header>
+
+      <div class="config-grupo glass">
+        <h3>Tema</h3>
+        <div class="config-opcoes" id="config-tema">
+          <button data-tema="escuro" class="chip-opcao ativo">Escuro (padrão)</button>
+          <button data-tema="meianoite" class="chip-opcao">Meia-noite</button>
+          <button data-tema="crepusculo" class="chip-opcao">Crepúsculo</button>
+        </div>
+      </div>
+
+      <div class="config-grupo glass">
+        <h3>Cor principal</h3>
+        <div class="config-cores" id="config-cores">
+          <button class="bolha-cor" data-cor="#b06ab3" style="--cor:#b06ab3"></button>
+          <button class="bolha-cor" data-cor="#ec4899" style="--cor:#ec4899"></button>
+          <button class="bolha-cor" data-cor="#6d5dfc" style="--cor:#6d5dfc"></button>
+          <button class="bolha-cor" data-cor="#3b82f6" style="--cor:#3b82f6"></button>
+          <input type="color" id="config-cor-custom" title="Escolher cor personalizada">
+        </div>
+      </div>
+
+      <div class="config-grupo glass">
+        <h3>Efeito de fundo</h3>
+        <div class="config-opcoes" id="config-efeito">
+          <button data-efeito="estrelas" class="chip-opcao ativo">Estrelas</button>
+          <button data-efeito="coracoes" class="chip-opcao">Corações</button>
+          <button data-efeito="neve" class="chip-opcao">Neve</button>
+          <button data-efeito="nenhum" class="chip-opcao">Nenhum</button>
+        </div>
+      </div>
+
+      <div class="config-grupo glass">
+        <h3>Preferências</h3>
+        <label class="switch-linha">
+          <span>Animações</span>
+          <input type="checkbox" id="config-animacoes" checked>
+          <span class="switch-visual"></span>
+        </label>
+        <label class="switch-linha">
+          <span>Sons ao clicar</span>
+          <input type="checkbox" id="config-sons" checked>
+          <span class="switch-visual"></span>
+        </label>
+        <label class="switch-linha">
+          <span>Música de fundo automática</span>
+          <input type="checkbox" id="config-musica-fundo">
+          <span class="switch-visual"></span>
+        </label>
+      </div>
+
+      <button class="botao-fantasma" id="btn-resetar-config">Restaurar padrões</button>
+    </section>
+
+  </main>
+
+  <!-- ---------- Navegação inferior mobile ---------- -->
+  <nav id="nav-mobile" class="nav-mobile"></nav>
+
+</div>
+
+<!-- ==================== MODAL GENÉRICO ==================== -->
+<div id="modal-overlay" class="modal-overlay">
+  <div class="modal glass" id="modal-conteudo"></div>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script src="js/config.js"></script>
+<script src="js/sounds.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/loading.js"></script>
+<script src="js/router.js"></script>
+<script src="js/counter.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/videos.js"></script>
+<script src="js/player.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/letters.js"></script>
+<script src="js/goals.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/places.js"></script>
+<script src="js/games.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
